@@ -1,2 +1,0 @@
-# emprendimiento
-Curso de Emprendimiento
