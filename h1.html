@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tándem - Terapia de Parejas en Línea</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .feature-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Estilos para las páginas y transiciones */
+        .page {
+            animation: fadeIn 0.5s;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        /* Estilo para el loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #0ea5e9;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- =========== Header / Barra de Navegación =========== -->
+    <header class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <a href="#" data-page="home" class="nav-link">
+                    <img src="imagen_2025-06-25_204125559-removebg-preview.png" alt="Tándem Logo" class="inline-block h-24 mr-2">
+                </a>
+                
+                <!-- Menú de Navegación para Desktop -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" data-page="home" class="nav-link text-gray-600 hover:text-sky-600 transition">Inicio</a>
+                    <a href="#" data-page="pricing" class="nav-link text-gray-600 hover:text-sky-600 transition">Planes</a>
+                    <a href="#" data-page="success-stories" class="nav-link text-gray-600 hover:text-sky-600 transition">Casos de Éxito</a>
+                    <a href="#" data-page="therapist-profile" class="nav-link text-gray-600 hover:text-sky-600 transition">Psicólogos</a>
+                </nav>
+                
+                <!-- Botones de Acción -->
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="#" data-page="login" class="nav-link text-gray-600 hover:text-sky-600 font-medium px-4 py-2 rounded-md transition">Iniciar Sesión</a>
+                    <a href="#" data-page="register" class="nav-link btn bg-sky-600 text-white font-medium px-4 py-2 rounded-md hover:bg-sky-700 shadow-sm">Registrarse</a>
+                </div>
+
+                <!-- Botón de Menú para Móvil -->
+                <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-sky-600">
+                    <i data-feather="menu"></i>
+                </button>
+            </div>
+            
+            <!-- Menú desplegable para Móvil -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4">
+                <a href="#" data-page="home" class="nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-sky-50 rounded-md">Inicio</a>
+                <a href="#" data-page="pricing" class="nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-sky-50 rounded-md">Planes</a>
+                <a href="#" data-page="success-stories" class="nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-sky-50 rounded-md">Casos de Éxito</a>
+                <a href="#" data-page="therapist-profile" class="nav-link block py-2 px-4 text-sm text-gray-600 hover:bg-sky-50 rounded-md">Psicólogos</a>
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                     <a href="#" data-page="login" class="nav-link block w-full text-left py-2 px-4 text-sm text-gray-600 hover:bg-sky-50 rounded-md">Iniciar Sesión</a>
+                     <a href="#" data-page="register" class="nav-link mt-2 block w-full text-center btn bg-sky-600 text-white font-medium px-4 py-2 rounded-md hover:bg-sky-700 shadow-sm">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- =========== Contenedor Principal de Páginas =========== -->
+    <main>
+        
+        <!-- ======================================================= -->
+        <!-- ============== PÁGINA 1: INICIO (HOME) ================ -->
+        <!-- ======================================================= -->
+        <div id="page-home" class="page">
+            <section class="hero-gradient py-20 md:py-32">
+                <div class="container mx-auto px-6 text-center">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-800 leading-tight">
+                        Reconectando Corazones, <br class="hidden md:block"> Sanando Relaciones
+                    </h1>
+                    <p class="mt-6 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+                        Una plataforma segura y confidencial para fortalecer su vínculo. Terapia de pareja en línea, con terapeutas certificados y herramientas de IA para potenciar su crecimiento.
+                    </p>
+                    <div class="mt-10 flex justify-center items-center gap-4 flex-wrap">
+                        <a href="#" data-page="register" class="nav-link btn bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 text-lg shadow-lg">Comenzar Terapia</a>
+                    </div>
+                </div>
+            </section>
+             <section class="py-20 bg-white">
+                 <div class="container mx-auto px-6">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl md:text-4xl font-bold text-gray-800">Un enfoque moderno para el bienestar de su relación</h2>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                       <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center"><div class="bg-sky-100 text-sky-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-feather="video"></i></div><h3 class="text-xl font-semibold mb-2">Sesiones por Videollamada</h3><p class="text-gray-600">Conéctense con su terapeuta desde la comodidad y privacidad de su hogar.</p></div>
+                       <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center"><div class="bg-sky-100 text-sky-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-feather="cpu"></i></div><h3 class="text-xl font-semibold mb-2">✨ Recomendaciones con IA</h3><p class="text-gray-600">Nuestra IA sugiere ejercicios y recursos personalizados para sus necesidades.</p></div>
+                       <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center"><div class="bg-sky-100 text-sky-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-feather="activity"></i></div><h3 class="text-xl font-semibold mb-2">Seguimiento del Progreso</h3><p class="text-gray-600">Visualicen su evolución a través de herramientas y métricas claras.</p></div>
+                       <div class="feature-card bg-gray-50 p-8 rounded-xl border border-gray-200 text-center"><div class="bg-sky-100 text-sky-600 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-6"><i data-feather="message-square"></i></div><h3 class="text-xl font-semibold mb-2">Chat con su Terapeuta</h3><p class="text-gray-600">Reciban apoyo entre sesiones de forma asincrónica.</p></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Forms pages (Register, Login) -->
+        <div id="page-register" class="page hidden"><div class="py-20 bg-gray-50"><div class="container mx-auto px-6"><div class="max-w-xl mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg"><h2 class="text-3xl font-bold text-center text-gray-800 mb-2">Creen su cuenta en pareja</h2><p class="text-center text-gray-500 mb-8">Un solo paso para empezar a fortalecer su relación.</p><form><div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"><div><label for="name1" class="block mb-2 text-sm font-medium text-gray-700">Tu Nombre</label><input type="text" id="name1" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="Ana" required></div><div><label for="name2" class="block mb-2 text-sm font-medium text-gray-700">Nombre de tu Pareja</label><input type="text" id="name2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="Javier"></div></div><div class="mb-6"><label for="email" class="block mb-2 text-sm font-medium text-gray-700">Correo Electrónico (compartido)</label><input type="email" id="email" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="ana.y.javier@email.com" required></div><div class="mb-6"><label for="password" class="block mb-2 text-sm font-medium text-gray-700">Contraseña</label><input type="password" id="password" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="•••••••••" required></div><button type="submit" data-page="dashboard" class="nav-link text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full px-5 py-3 text-center">Crear Cuenta y Continuar</button><p class="text-sm text-center mt-4 text-gray-500">¿Ya tienen una cuenta? <a href="#" data-page="login" class="nav-link font-medium text-sky-600 hover:underline">Iniciar Sesión</a></p></form></div></div></div></div>
+        <div id="page-login" class="page hidden"><div class="py-20 bg-gray-50"><div class="container mx-auto px-6"><div class="max-w-md mx-auto bg-white p-8 md:p-12 rounded-xl shadow-lg"><h2 class="text-3xl font-bold text-center text-gray-800 mb-2">¡Bienvenidos de nuevo!</h2><p class="text-center text-gray-500 mb-8">Continúen su camino hacia una mejor relación.</p><form><div class="mb-6"><label for="login-email" class="block mb-2 text-sm font-medium text-gray-700">Correo Electrónico</label><input type="email" id="login-email" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="su@email.com" required></div><div class="mb-6"><label for="login-password" class="block mb-2 text-sm font-medium text-gray-700">Contraseña</label><input type="password" id="login-password" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="•••••••••" required></div><button type="submit" data-page="dashboard" class="nav-link text-white bg-sky-600 hover:bg-sky-700 focus:ring-4 focus:outline-none focus:ring-sky-300 font-medium rounded-lg text-sm w-full px-5 py-3 text-center">Iniciar Sesión</button><p class="text-sm text-center mt-4 text-gray-500">¿No tienen una cuenta? <a href="#" data-page="register" class="nav-link font-medium text-sky-600 hover:underline">Registrarse</a></p></form></div></div></div></div>
+        
+        <!-- Other pages (Pricing, Success Stories, etc.) -->
+        <div id="page-pricing" class="page hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-800">Planes Flexibles para Cada Pareja</h2><p class="mt-4 text-lg text-gray-600 max-w-2xl mx-auto">Elijan el plan que mejor se adapte a su ritmo y necesidades. Sin contratos a largo plazo.</p></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"><div class="border border-gray-200 rounded-xl p-8 flex flex-col"><h3 class="text-2xl font-semibold mb-2">Mensual</h3><p class="text-gray-500 mb-6">Ideal para empezar y mantener el ritmo.</p><p class="text-5xl font-bold mb-6">S/. 159<span class="text-lg font-normal text-gray-500">/mes</span></p><ul class="space-y-4 text-gray-600 mb-8 flex-grow"><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>4 sesiones de video al mes</li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Chat ilimitado con su terapeuta</li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Acceso a la biblioteca de recursos</li></ul><a href="#" data-page="register" class="nav-link mt-auto w-full text-center btn bg-sky-600 text-white font-medium px-4 py-3 rounded-md hover:bg-sky-700 shadow-sm">Elegir Plan</a></div><div class="border-2 border-sky-500 rounded-xl p-8 flex flex-col relative shadow-2xl"><div class="absolute top-0 -translate-y-1/2 bg-sky-500 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</div><h3 class="text-2xl font-semibold mb-2">Trimestral</h3><p class="text-gray-500 mb-6">Un compromiso para ver resultados sólidos.</p><p class="text-5xl font-bold mb-6">S/. 299<span class="text-lg font-normal text-gray-500">/3 meses</span></p><ul class="space-y-4 text-gray-600 mb-8 flex-grow"><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Todo lo del plan Mensual</li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i><b>✨ Recomendaciones con IA</b></li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Seguimiento de progreso avanzado</li></ul><a href="#" data-page="register" class="nav-link mt-auto w-full text-center btn bg-sky-600 text-white font-medium px-4 py-3 rounded-md hover:bg-sky-700 shadow-sm">Elegir Plan</a></div><div class="border border-gray-200 rounded-xl p-8 flex flex-col"><h3 class="text-2xl font-semibold mb-2">Anual</h3><p class="text-gray-500 mb-6">El mejor valor para un cambio duradero.</p><p class="text-5xl font-bold mb-6">S/. 999<span class="text-lg font-normal text-gray-500">/12 meses</span></p><ul class="space-y-4 text-gray-600 mb-8 flex-grow"><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Todo lo del plan Trimestral</li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Una sesión de emergencia al mes</li><li class="flex items-center"><i data-feather="check" class="text-green-500 mr-2"></i>Acceso prioritario a talleres</li></ul><a href="#" data-page="register" class="nav-link mt-auto w-full text-center btn bg-sky-600 text-white font-medium px-4 py-3 rounded-md hover:bg-sky-700 shadow-sm">Elegir Plan</a></div></div></div></div></div>
+        <div id="page-success-stories" class="page hidden"><div class="py-20"><div class="container mx-auto px-6"><div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-gray-800">Historias que Inspiran</h2><p class="mt-4 text-lg text-gray-600">Parejas como ustedes han transformado su relación con nuestra ayuda.</p></div><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"><div class="bg-white rounded-xl shadow-md overflow-hidden"><img src="https://i.ytimg.com/vi/WvvaXVKBr8o/sddefault.jpg" alt="Foto de pareja"><div class="p-6"><p class="text-gray-600 italic mb-4">"Superamos una crisis de comunicación que nos estaba alejando. Las herramientas que aprendimos aquí son parte de nuestro día a día ahora."</p><p class="font-semibold">Laura y Miguel</p></div></div><div class="bg-white rounded-xl shadow-md overflow-hidden"><img src="https://www.cartv.es/thumbs/fullwidth/2023-11/europapress-5599440-cantautores-marwan-rozalen-aparecen-documental-terapia-parejas-proyecta.jpg" alt="Foto de pareja"><div class="p-6"><p class="text-gray-600 italic mb-4">"La terapia en línea nos dio la privacidad y comodidad que necesitábamos para abrirnos de verdad. Ha sido la mejor inversión en nuestra relación."</p><p class="font-semibold">Sofía y David</p></div></div><div class="bg-white rounded-xl shadow-md overflow-hidden"><img src="https://clinicanuevaesperanza.cl/wp-content/uploads/2020/08/terapia-de-parejas-psicologia-y-psiquiatria-1.jpg" alt="Foto de pareja"><div class="p-6"><p class="text-gray-600 italic mb-4">"Como padres primerizos, el estrés era abrumador. Tándem nos ayudó a reencontrarnos no solo como padres, sino como pareja."</p><p class="font-semibold">Elena y Roberto</p></div></div></div></div></div></div>
+        <div id="page-therapist-profile" class="page hidden"><div class="py-20 bg-white"><div class="container mx-auto px-6 max-w-4xl"><div class="bg-white p-8 rounded-xl shadow-lg md:flex gap-8"><div class="md:w-1/3 text-center"><img src="https://www.psicologiadelabelleza.com/wp-content/uploads/2024/07/psicologia_de_la_belleza_consulta_gratuita_.png" alt="Foto de la terapeuta" class="h-40 w-40 rounded-full object-cover mx-auto mb-4 border-4 border-sky-200"><h2 class="text-2xl font-bold">Dra. Isabel Rojas</h2><p class="text-sky-600">Psicóloga Clínica, M.A.</p><p class="text-sm text-gray-500 mt-1">Licencia #12345</p><button class="mt-6 w-full btn bg-sky-600 text-white font-medium py-2 px-4 rounded-md hover:bg-sky-700">Agendar Sesión</button></div><div class="md:w-2/3 mt-8 md:mt-0"><h3 class="text-xl font-semibold border-b pb-2 mb-4">Sobre Mí</h3><p class="text-gray-600 mb-6">Con más de 12 años de experiencia, mi pasión es ayudar a las parejas a redescubrir su conexión y construir una base sólida de comunicación y confianza. Mi enfoque es colaborativo y empático, creando un espacio seguro para la exploración y el crecimiento.</p><h3 class="text-xl font-semibold border-b pb-2 mb-4">Especialidades</h3><div class="flex flex-wrap gap-2"><span class="bg-sky-100 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Terapia de Comunicación</span><span class="bg-sky-100 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Resolución de Conflictos</span><span class="bg-sky-100 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Terapia de Intimidad</span><span class="bg-sky-100 text-sky-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Manejo del Estrés</span></div></div></div></div></div></div>
+
+        <!-- ======================================================= -->
+        <!-- =========== PÁGINA 7: DASHBOARD DE USUARIO ============ -->
+        <!-- ======================================================= -->
+        <div id="page-dashboard" class="page hidden">
+             <div class="flex h-screen bg-gray-100">
+                <!-- Sidebar -->
+                <div class="hidden md:flex flex-col w-64 bg-white shadow-lg">
+                    <div class="flex items-center justify-center h-20 border-b">
+                         <a href="#" data-page="home" class="nav-link">
+                             <img src="imagen_2025-06-25_204125559-removebg-preview.png" alt="ConectaMente Logo" class="inline-block h-16 mr-2">
+                         </a>
+                    </div>
+                    <div class="flex-grow">
+                        <nav class="mt-5">
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 bg-gray-200 text-gray-700" data-subpage="dashboard-main"><i data-feather="home" class="mr-3"></i>Dashboard</a>
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-200" data-subpage="dashboard-ai-tools"><span class="mr-3">✨</span>Conexión con IA</a>
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-200" data-subpage="dashboard-materials"><i data-feather="book-open" class="mr-3"></i>Material de Apoyo</a>
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-200" data-subpage="dashboard-sessions"><i data-feather="video" class="mr-3"></i>Sesiones Grabadas</a>
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-200" data-subpage="dashboard-progress"><i data-feather="trending-up" class="mr-3"></i>Mi Progreso</a>
+                            <a href="#" class="dashboard-link flex items-center mt-4 py-2 px-6 text-gray-500 hover:bg-gray-200" data-subpage="dashboard-therapist"><i data-feather="user" class="mr-3"></i>Mi Terapeuta</a>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Main content -->
+                <div class="flex flex-col flex-1 overflow-y-auto">
+                    <div class="h-20 items-center justify-between flex px-6 bg-white border-b">
+                        <h1 id="dashboard-title" class="text-2xl font-semibold text-gray-700">Dashboard</h1>
+                        <a href="#" data-page="home" class="nav-link text-sm text-gray-600 hover:text-sky-600">Cerrar Sesión <i data-feather="log-out" class="inline w-4 h-4 ml-1"></i></a>
+                    </div>
+                    <div class="p-6">
+                        <!-- ======================================= -->
+                        <!-- Contenido dinámico del dashboard -->
+                        <!-- ======================================= -->
+                        
+                        <!-- Subpágina: Dashboard Principal -->
+                        <div id="dashboard-main" class="subpage">
+                            <h2 class="text-xl font-semibold mb-4">¡Hola, Ana y Javier!</h2>
+                            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                               <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-gray-700">Próxima Sesión</h3><p class="text-sky-600 text-lg">Martes, 3 de Julio a las 7:00 PM</p><p class="text-sm text-gray-500">con Dra. Isabel Rojas</p></div>
+                               <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-gray-700">Último Ejercicio con IA</h3><p class="text-sky-600 text-lg">Ejercicio de Confianza</p><p class="text-sm text-gray-500">Generado ayer</p></div>
+                               <div class="bg-white p-6 rounded-lg shadow"><h3 class="font-semibold text-gray-700">Progreso de Comunicación</h3><div class="w-full bg-gray-200 rounded-full h-2.5 mt-2"><div class="bg-green-500 h-2.5 rounded-full" style="width: 75%"></div></div></div>
+                            </div>
+                        </div>
+
+                        <!-- Subpágina: Herramientas de IA -->
+                        <div id="dashboard-ai-tools" class="subpage hidden">
+                           <h2 class="text-xl font-semibold mb-6">✨ Herramientas de Conexión con IA</h2>
+                           
+                           <!-- Herramienta 1: Conversation Starters -->
+                           <div class="bg-white p-6 rounded-lg shadow mb-8">
+                                <h3 class="font-semibold text-lg mb-4 text-gray-700">Iniciadores de Conversación</h3>
+                                <p class="text-gray-600 mb-4">¿Atascados en la rutina? Generen preguntas profundas para reavivar la chispa y la curiosidad mutua.</p>
+                                <button id="generate-questions-btn" class="btn bg-sky-600 text-white font-medium py-2 px-5 rounded-md hover:bg-sky-700">✨ Generar Nuevas Preguntas</button>
+                                <div id="questions-loader" class="hidden my-4 mx-auto loader"></div>
+                                <div id="questions-result" class="mt-6 space-y-3"></div>
+                           </div>
+
+                           <!-- Herramienta 2: Message Reframer -->
+                           <div class="bg-white p-6 rounded-lg shadow">
+                                <h3 class="font-semibold text-lg mb-4 text-gray-700">Asistente de Comunicación</h3>
+                                <p class="text-gray-600 mb-4">¿A punto de enviar un mensaje en caliente? Escríbelo aquí primero y deja que la IA te ayude a comunicarte de forma más constructiva.</p>
+                                <textarea id="reframer-input" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" rows="4" placeholder="Ej: '¡Nunca lavas los platos! Estoy harto/a.'"></textarea>
+                                <button id="reframe-message-btn" class="btn mt-4 bg-sky-600 text-white font-medium py-2 px-5 rounded-md hover:bg-sky-700">✨ Reformular Mensaje con IA</button>
+                                <div id="reframer-loader" class="hidden my-4 mx-auto loader"></div>
+                                <div id="reframer-result" class="mt-6 p-4 bg-sky-50 border border-sky-200 rounded-lg hidden"></div>
+                           </div>
+                        </div>
+
+                        <!-- Subpágina: Material de Apoyo (con IA) -->
+                        <div id="dashboard-materials" class="subpage hidden">
+                           <h2 class="text-xl font-semibold mb-6">Material de Apoyo</h2>
+                           <!-- Herramienta 3: Generador de Ejercicios -->
+                            <div class="bg-white p-6 rounded-lg shadow mb-8">
+                                <h3 class="font-semibold text-lg mb-4 text-gray-700">Generador de Ejercicios Personalizados</h3>
+                                <p class="text-gray-600 mb-4">Indiquen un tema o problema en el que quieran trabajar, y nuestra IA creará un ejercicio práctico para ustedes.</p>
+                                <div class="flex gap-4">
+                                    <input type="text" id="exercise-topic-input" class="flex-grow bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-sky-500 focus:border-sky-500 block w-full p-2.5" placeholder="Ej: Confianza, finanzas, tiempo de calidad...">
+                                    <button id="generate-exercise-btn" class="btn bg-sky-600 text-white font-medium py-2 px-5 rounded-md hover:bg-sky-700">✨ Crear Ejercicio</button>
+                                </div>
+                                <div id="exercise-loader" class="hidden my-4 mx-auto loader"></div>
+                                <div id="exercise-result" class="mt-6 p-4 bg-gray-50 border border-gray-200 rounded-lg prose"></div>
+                           </div>
+                        </div>
+
+                        <!-- Otras subpáginas del dashboard -->
+                        <div id="dashboard-sessions" class="subpage hidden"><h2 class="text-xl font-semibold mb-4">Sesiones Grabadas</h2><div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"><div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://placehold.co/400x225/e0f2fe/0ea5e9?text=Sesión+25/06" alt="Video de sesión"><div class="p-4"><p class="font-semibold">Sesión del 25 de Junio</p><p class="text-sm text-gray-500">Tema: Escucha Activa</p></div></div><div class="bg-white rounded-lg shadow overflow-hidden"><img src="https://placehold.co/400x225/e0f2fe/0ea5e9?text=Sesión+18/06" alt="Video de sesión"><div class="p-4"><p class="font-semibold">Sesión del 18 de Junio</p><p class="text-sm text-gray-500">Tema: Lenguajes del Amor</p></div></div></div></div>
+                        <div id="dashboard-progress" class="subpage hidden"><h2 class="text-xl font-semibold mb-4">Mi Progreso</h2><p>Aquí se mostrarán gráficos y métricas de su progreso.</p></div>
+                        <div id="dashboard-therapist" class="subpage hidden"><h2 class="text-xl font-semibold mb-4">Mi Terapeuta</h2><p>Aquí se mostrará el perfil de su terapeuta asignado.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </main>
+    
+    <!-- =========== Footer (se muestra en páginas principales) =========== -->
+    <footer id="main-footer" class="bg-gray-800 text-white pt-16 pb-8">
+        <div class="container mx-auto px-6">
+            <div class="text-center">
+                <p>&copy; 2025 Tándem. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Reemplazar los íconos de Feather
+        feather.replace();
+
+        // =========== Lógica de Navegación SPA (Single Page Application) ===========
+        
+        const pages = document.querySelectorAll('.page');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mainFooter = document.getElementById('main-footer');
+
+        const showPage = (pageId) => {
+            pages.forEach(page => page.classList.add('hidden'));
+            const pageToShow = document.getElementById(`page-${pageId}`);
+            if (pageToShow) pageToShow.classList.remove('hidden');
+            window.scrollTo(0, 0); 
+            
+            const isDashboard = pageId === 'dashboard';
+            document.querySelector('header').classList.toggle('hidden', isDashboard);
+            mainFooter.classList.toggle('hidden', isDashboard);
+            if(isDashboard) showSubpage('dashboard-main');
+        };
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const pageId = link.getAttribute('data-page');
+                if (pageId) showPage(pageId);
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+
+        showPage('home');
+
+        // =========== Lógica del Menú Móvil ===========
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // =========== Lógica de Navegación del Dashboard ===========
+        const dashboardLinks = document.querySelectorAll('.dashboard-link');
+        const subpages = document.querySelectorAll('.subpage');
+        const dashboardTitle = document.getElementById('dashboard-title');
+        
+        const showSubpage = (subpageId) => {
+            subpages.forEach(subpage => subpage.classList.add('hidden'));
+            const subpageToShow = document.getElementById(subpageId);
+            if (subpageToShow) subpageToShow.classList.remove('hidden');
+        };
+        
+        dashboardLinks.forEach(link => {
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                const subpageId = link.getAttribute('data-subpage');
+                
+                dashboardLinks.forEach(l => {
+                    l.classList.remove('bg-gray-200', 'text-gray-700');
+                    l.classList.add('text-gray-500');
+                });
+                link.classList.add('bg-gray-200', 'text-gray-700');
+                link.classList.remove('text-gray-500');
+
+                dashboardTitle.textContent = link.textContent.replace('✨', '').trim();
+
+                if (subpageId) showSubpage(subpageId);
+            });
+        });
+
+        // =======================================================
+        // =========== LÓGICA DE LA API DE GEMINI ================
+        // =======================================================
+        
+        const apiKey = ""; // Se deja vacío, Canvas lo proveerá en runtime.
+
+        // Función reutilizable para llamar a la API de Gemini
+        async function callGemini(prompt, loaderElement, resultElement) {
+            loaderElement.classList.remove('hidden');
+            resultElement.classList.add('hidden');
+            resultElement.innerHTML = '';
+            
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            const payload = {
+                contents: [{ role: "user", parts: [{ text: prompt }] }]
+            };
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error en la API: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0) {
+                    const text = result.candidates[0].content.parts[0].text;
+                    resultElement.innerHTML = formatGeminiResponse(text);
+                } else {
+                     resultElement.innerHTML = '<p class="text-red-500">No se pudo obtener una respuesta de la IA. Inténtalo de nuevo.</p>';
+                }
+            } catch (error) {
+                console.error('Error llamando a la API de Gemini:', error);
+                resultElement.innerHTML = `<p class="text-red-500">Ocurrió un error al conectar con el servicio de IA. Detalles: ${error.message}</p>`;
+            } finally {
+                loaderElement.classList.add('hidden');
+                resultElement.classList.remove('hidden');
+            }
+        }
+        
+        // Función para formatear la respuesta de Gemini a HTML
+        function formatGeminiResponse(text) {
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Negrita
+                .replace(/\*(.*?)\*/g, '<em>$1</em>')       // Cursiva
+                .replace(/\n/g, '<br>');                      // Saltos de línea
+        }
+
+
+        // ---- Event Listener para Generador de Ejercicios ----
+        document.getElementById('generate-exercise-btn').addEventListener('click', () => {
+            const topic = document.getElementById('exercise-topic-input').value;
+            if (!topic.trim()) {
+                alert('Por favor, introduce un tema para el ejercicio.');
+                return;
+            }
+            const prompt = `Actúa como un terapeuta de parejas experto. Basado en el tema "${topic}", genera un ejercicio práctico y constructivo para una pareja. El ejercicio debe ser claro, con un título en negrita, una breve introducción, y pasos numerados. El tono debe ser de apoyo y positivo.`;
+            callGemini(prompt, document.getElementById('exercise-loader'), document.getElementById('exercise-result'));
+        });
+
+        // ---- Event Listener para Iniciadores de Conversación ----
+        document.getElementById('generate-questions-btn').addEventListener('click', () => {
+            const prompt = `Actúa como un consejero de relaciones. Genera 5 preguntas profundas y originales para que una pareja reconecte. Evita clichés. Numera las preguntas.`;
+            callGemini(prompt, document.getElementById('questions-loader'), document.getElementById('questions-result'));
+        });
+
+        // ---- Event Listener para Reformulador de Mensajes ----
+        document.getElementById('reframe-message-btn').addEventListener('click', () => {
+            const message = document.getElementById('reframer-input').value;
+             if (!message.trim()) {
+                alert('Por favor, introduce el mensaje que quieres reformular.');
+                return;
+            }
+            const prompt = `Actúa como un experto en comunicación no violenta. El siguiente mensaje es conflictivo. Re-escríbelo para que exprese la necesidad o sentimiento subyacente sin culpar ni atacar. El nuevo mensaje debe ser en primera persona (usando "Yo siento...", "Me gustaría...", "Necesito..."), ser constructivo y abrir la puerta a una conversación. Ofrece una o dos opciones. Mensaje original: "${message}"`;
+            callGemini(prompt, document.getElementById('reframer-loader'), document.getElementById('reframer-result'));
+        });
+
+    </script>
+</body>
+</html>
